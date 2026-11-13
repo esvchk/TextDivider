@@ -1,4 +1,4 @@
-package com.academy.course;
+package com.innowise.course;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

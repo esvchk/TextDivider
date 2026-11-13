@@ -1,4 +1,4 @@
-package com.academy.course;
+package com.innowise.course;
 
 /**
  * Hello world!
