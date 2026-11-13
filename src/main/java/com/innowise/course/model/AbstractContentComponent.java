@@ -1,6 +1,5 @@
 package com.innowise.course.model;
 
-import com.innowise.course.exception.TextException;
 
 public abstract class AbstractContentComponent {
 
