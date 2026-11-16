@@ -9,8 +9,17 @@ public class TextComponent extends AbstractContentComponent {
 
     private String text;
 
+    public List<AbstractContentComponent> getParagraphs() {
+        return paragraphs;
+    }
+
     public TextComponent(String text) {
         this.text = text;
+    }
+
+    @Override
+    public String getText() {
+        return text;
     }
 
 
@@ -20,9 +29,9 @@ public class TextComponent extends AbstractContentComponent {
     }
 
     @Override
-    public String getText() {
-        return text;
+    public String toString() {
+        return "TextComponent{" +
+                "paragraphs=" + paragraphs +
+                '}';
     }
-
-
 }
