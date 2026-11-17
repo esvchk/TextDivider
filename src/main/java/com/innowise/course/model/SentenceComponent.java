@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SentenceComponent extends AbstractContentComponent{
 
-    private List<AbstractContentComponent> words = new ArrayList<>();
+    private List<AbstractContentComponent> lexemes = new ArrayList<>();
 
     private String sentence;
 
@@ -14,10 +14,17 @@ public class SentenceComponent extends AbstractContentComponent{
         this.sentence = sentence;
     }
 
+    public List<AbstractContentComponent> getLexemes() {
+        return lexemes;
+    }
+
+    public void setLexemes(List<AbstractContentComponent> lexemes) {
+        this.lexemes = lexemes;
+    }
 
     @Override
     public void add(AbstractContentComponent component) {
-        words.add(component);
+        lexemes.add(component);
     }
 
     @Override
@@ -28,7 +35,7 @@ public class SentenceComponent extends AbstractContentComponent{
     @Override
     public String toString() {
         return "SentenceComponent{" +
-                "words=" + words +
+                "words=" + lexemes +
                 ", sentence='" + sentence + '\'' +
                 '}';
     }

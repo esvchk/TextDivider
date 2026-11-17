@@ -7,7 +7,7 @@ import com.innowise.course.model.SentenceComponent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SentenceDivider extends AbstractDivider {
+public final class SentenceDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_SENTENCE = "(?s)[^.!?]+[.!?]+(?:\\s|$)|[^.!?]+$";
     private final ParagraphComponent paragraphComponent;

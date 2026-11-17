@@ -13,6 +13,10 @@ public class WordComponent extends AbstractContentComponent{
         this.word = word;
     }
 
+    public List<AbstractContentComponent> getCharacters() {
+        return characters;
+    }
+
     @Override
     public void add(AbstractContentComponent component) {
         characters.add(component);
@@ -21,5 +25,13 @@ public class WordComponent extends AbstractContentComponent{
     @Override
     public String getText() {
         return word;
+    }
+
+    @Override
+    public String toString() {
+        return "WordComponent{" +
+                "characters=" + characters +
+                ", word='" + word + '\'' +
+                '}';
     }
 }

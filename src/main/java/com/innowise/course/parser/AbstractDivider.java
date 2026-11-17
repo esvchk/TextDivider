@@ -2,14 +2,12 @@ package com.innowise.course.parser;
 
 import com.innowise.course.model.AbstractContentComponent;
 
-import java.util.List;
-
 public abstract class AbstractDivider {
 
-    protected AbstractDivider nextHandler;
+    protected AbstractDivider nextDivider;
 
-    public void setNextHandler(AbstractDivider nextHandler) {
-        this.nextHandler = nextHandler;
+    public void setNextDivider(AbstractDivider nextHandler) {
+        this.nextDivider = nextHandler;
     }
 
     public abstract void divideComponent(AbstractContentComponent abstractContentComponent);

@@ -13,6 +13,10 @@ public class LexemeComponent extends AbstractContentComponent {
         this.lexeme = lexeme;
     }
 
+    public List<AbstractContentComponent> getWords() {
+        return words;
+    }
+
     @Override
     public void add(AbstractContentComponent component) {
         words.add(component);
@@ -21,5 +25,13 @@ public class LexemeComponent extends AbstractContentComponent {
     @Override
     public String getText() {
         return lexeme;
+    }
+
+    @Override
+    public String toString() {
+        return "LexemeComponent{" +
+                "words=" + words +
+                ", lexeme='" + lexeme + '\'' +
+                '}';
     }
 }

@@ -12,4 +12,11 @@ public class CharacterComponent extends AbstractContentComponent {
     public String getText() {
         return character;
     }
+
+    @Override
+    public String toString() {
+        return "CharacterComponent{" +
+                "character='" + character + '\'' +
+                '}';
+    }
 }
