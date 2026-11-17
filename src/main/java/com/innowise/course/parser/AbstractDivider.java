@@ -1,5 +1,6 @@
 package com.innowise.course.parser;
 
+import com.innowise.course.exception.TextException;
 import com.innowise.course.model.AbstractContentComponent;
 
 public abstract class AbstractDivider {
@@ -10,5 +11,5 @@ public abstract class AbstractDivider {
         this.nextDivider = nextHandler;
     }
 
-    public abstract void divideComponent(AbstractContentComponent abstractContentComponent);
+    public abstract void divideComponent(AbstractContentComponent abstractContentComponent) throws TextException;
 }
