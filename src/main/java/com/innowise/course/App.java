@@ -20,8 +20,8 @@ public class App {
         String line = String.join("\n", textReader.read(Path.of("D:\\courses\\project\\TextDivider\\.idea\\source.txt")));
         AbstractContentComponent textComponent = new TextComponent(line);
 
-        AbstractContentComponent paragraphComponent = new ParagraphComponent("  It is beginning");
-        AbstractContentComponent sentenceComponent = new SentenceComponent("Sentence");
+        AbstractContentComponent paragraphComponent = new ParagraphComponent(textComponent.getText());
+        AbstractContentComponent sentenceComponent = new SentenceComponent(paragraphComponent.getText());
         AbstractDivider paragraph = new ParagraphDivider(textComponent);
         AbstractDivider sentence = new SentenceDivider(paragraphComponent);
         AbstractDivider lexeme = new LexemeDivider(sentenceComponent);
@@ -30,7 +30,7 @@ public class App {
         sentence.setNextDivider(lexeme);
 
         paragraph.divideComponent(textComponent);
-        paragraph.divideComponent(sentenceComponent);
+        sentence.divideComponent(sentenceComponent);
         paragraph.divideComponent(paragraphComponent);
 
 

@@ -13,11 +13,11 @@ public final class ParagraphDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_PARAGRAPH = "(?m)^[ \\t]+(\\S.*(?:\\n(?![ \\t]*$).*)*)";
     private AbstractDivider nextDivider;
-    private AbstractContentComponent textComponent;
+    private AbstractContentComponent contentComponent;
 
 
     public ParagraphDivider(AbstractContentComponent textComponent) {
-        this.textComponent = textComponent;
+        this.contentComponent = textComponent;
     }
 
     @Override
@@ -31,7 +31,7 @@ public final class ParagraphDivider extends AbstractDivider {
             String line = String.join("\n", abstractContentComponent.getText());
             Matcher m = Pattern.compile(DIVIDE_ON_PARAGRAPH).matcher(line);
             while (m.find()) {
-                textComponent.add(new ParagraphComponent(m.group()));
+                contentComponent.add(new ParagraphComponent(m.group()));
             }
             System.out.println("paragraph");
         } else if (nextDivider != null) {

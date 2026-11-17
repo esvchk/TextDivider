@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public final class SentenceDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_SENTENCE = "(?s)[^.!?]+[.!?]+(?:\\s|$)|[^.!?]+$";
-    private AbstractContentComponent paragraphComponent;
+    private AbstractContentComponent contentComponent;
     private AbstractDivider nextDivider;
 
     @Override
@@ -20,7 +20,7 @@ public final class SentenceDivider extends AbstractDivider {
     }
 
     public SentenceDivider(AbstractContentComponent paragraphComponent) {
-        this.paragraphComponent = paragraphComponent;
+        this.contentComponent = paragraphComponent;
     }
 
     @Override
@@ -29,7 +29,7 @@ public final class SentenceDivider extends AbstractDivider {
             String line = String.join("\n", abstractContentComponent.getText());
             Matcher m = Pattern.compile(DIVIDE_ON_SENTENCE).matcher(line);
             while (m.find()){
-                paragraphComponent.add(new SentenceComponent(m.group()));
+                contentComponent.add(new SentenceComponent(m.group()));
             }
             System.out.println("sentence");
         } else if (nextDivider != null) {

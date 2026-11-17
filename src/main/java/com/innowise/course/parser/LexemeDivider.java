@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public final class LexemeDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_LEXEME = "\\S+";
-    private AbstractContentComponent sentenceComponent;
+    private AbstractContentComponent contentComponent;
     private AbstractDivider nextDivider;
 
     public void setNextDivider(AbstractDivider nextDivider) {
@@ -19,7 +19,7 @@ public final class LexemeDivider extends AbstractDivider {
     }
 
     public LexemeDivider(AbstractContentComponent sentenceComponent) {
-        this.sentenceComponent = sentenceComponent;
+        this.contentComponent = sentenceComponent;
     }
 
     @Override
@@ -28,7 +28,7 @@ public final class LexemeDivider extends AbstractDivider {
             String line = String.join(" ", abstractContentComponent.getText());
             Matcher matcher = Pattern.compile(DIVIDE_ON_LEXEME).matcher(line);
             while(matcher.find()){
-                sentenceComponent.add(new LexemeComponent(matcher.group()));
+                contentComponent.add(new LexemeComponent(matcher.group()));
             }
             System.out.println("lexeme");
         } else if (nextDivider != null){
