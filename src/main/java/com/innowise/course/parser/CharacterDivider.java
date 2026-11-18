@@ -18,15 +18,20 @@ public final class CharacterDivider extends AbstractDivider {
     }
 
     @Override
-    public void divideComponent(AbstractContentComponent abstractContentComponent) throws TextException {
-        if (abstractContentComponent instanceof WordComponent) {
-            String line = String.join("",abstractContentComponent.getText());
+    public boolean checkInstance(AbstractContentComponent component) {
+        return component instanceof WordComponent;
+    }
+
+    @Override
+    public void divideComponent(AbstractContentComponent sourceComponent) throws TextException {
+        if (checkInstance(sourceComponent)) {
+            String line = String.join("", sourceComponent.getText());
             Matcher matcher = Pattern.compile(DIVIDE_ON_CHARACTERS).matcher(line);
             while(matcher.find()){
                 contentComponent.add(new CharacterComponent(matcher.group()));
             }
         } else  {
-            throw new TextException("No more handling");
+            throw new TextException("No more handlers");
         }
     }
 }

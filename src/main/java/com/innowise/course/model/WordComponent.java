@@ -23,6 +23,11 @@ public class WordComponent extends AbstractContentComponent{
     }
 
     @Override
+    public List<AbstractContentComponent> getInnerComponentList(AbstractContentComponent abstractContentComponent) {
+        return characters;
+    }
+
+    @Override
     public String getText() {
         return word;
     }

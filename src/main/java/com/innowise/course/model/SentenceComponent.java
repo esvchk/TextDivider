@@ -14,17 +14,15 @@ public class SentenceComponent extends AbstractContentComponent{
         this.sentence = sentence;
     }
 
-    public List<AbstractContentComponent> getLexemes() {
-        return lexemes;
-    }
-
-    public void setLexemes(List<AbstractContentComponent> lexemes) {
-        this.lexemes = lexemes;
-    }
 
     @Override
     public void add(AbstractContentComponent component) {
         lexemes.add(component);
+    }
+
+    @Override
+    public List<AbstractContentComponent> getInnerComponentList(AbstractContentComponent abstractContentComponent) {
+        return lexemes;
     }
 
     @Override

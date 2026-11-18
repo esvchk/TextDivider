@@ -12,28 +12,30 @@ public final class WordDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_WORDS = "[\\p{L}\\p{N}]+";
     private AbstractContentComponent contentComponent;
-    private AbstractDivider nextDivider;
 
-
-    @Override
-    public void setNextDivider(AbstractDivider nextDivider) {
-        this.nextDivider = nextDivider;
-    }
 
     public WordDivider(AbstractContentComponent lexemeComponent) {
         this.contentComponent = lexemeComponent;
     }
 
     @Override
-    public void divideComponent(AbstractContentComponent abstractContentComponent) throws TextException {
-        if (abstractContentComponent instanceof LexemeComponent) {
-            String line = String.join("", abstractContentComponent.getText());
+    public boolean checkInstance(AbstractContentComponent component) {
+        return component instanceof LexemeComponent;
+    }
+
+    @Override
+    public void divideComponent(AbstractContentComponent sourceComponent) throws TextException {
+        if (checkInstance(sourceComponent)) {
+            String line = String.join("", sourceComponent.getText());
             Matcher matcher = Pattern.compile(DIVIDE_ON_WORDS).matcher(line);
             while (matcher.find()){
                 contentComponent.add(new WordComponent(matcher.group()));
             }
+            for (AbstractContentComponent component : contentComponent.getInnerComponentList(sourceComponent)){
+                nextDivider.divideComponent(component);
+            }
         } else if (nextDivider != null) {
-            nextDivider.divideComponent(abstractContentComponent);
+            nextDivider.divideComponent(sourceComponent);
         }
     }
 }

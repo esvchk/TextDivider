@@ -30,9 +30,6 @@ public class App {
         sentence.setNextDivider(lexeme);
 
         paragraph.divideComponent(textComponent);
-        sentence.divideComponent(sentenceComponent);
-        paragraph.divideComponent(paragraphComponent);
-
 
 //        for (AbstractContentComponent component : textComponent.getParagraphs()){
 //            ParagraphComponent paragraphComponent = new ParagraphComponent(component.getText());

@@ -6,37 +6,37 @@ import com.innowise.course.model.AbstractContentComponent;
 import com.innowise.course.model.ParagraphComponent;
 import com.innowise.course.model.TextComponent;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public final class ParagraphDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_PARAGRAPH = "(?m)^[ \\t]+(\\S.*(?:\\n(?![ \\t]*$).*)*)";
-    private AbstractDivider nextDivider;
     private AbstractContentComponent contentComponent;
-
 
     public ParagraphDivider(AbstractContentComponent textComponent) {
         this.contentComponent = textComponent;
     }
 
     @Override
-    public void setNextDivider(AbstractDivider nextDivider) {
-        this.nextDivider = nextDivider;
+    public boolean checkInstance(AbstractContentComponent abstractContentComponent) {
+        return abstractContentComponent instanceof TextComponent;
     }
 
     @Override
-    public void divideComponent(AbstractContentComponent abstractContentComponent) throws TextException {
-        if (abstractContentComponent instanceof TextComponent) {
-            String line = String.join("\n", abstractContentComponent.getText());
+    public void divideComponent(AbstractContentComponent sourceComponent) throws TextException {
+        if (checkInstance(sourceComponent)) {
+            String line = String.join("\n", sourceComponent.getText());
             Matcher m = Pattern.compile(DIVIDE_ON_PARAGRAPH).matcher(line);
             while (m.find()) {
                 contentComponent.add(new ParagraphComponent(m.group()));
             }
-            System.out.println("paragraph");
+            for (AbstractContentComponent component : contentComponent.getInnerComponentList(sourceComponent)){
+                nextDivider.divideComponent(component);
+            }
         } else if (nextDivider != null) {
-            System.out.println("set next divider in paragraphdivider");
-            nextDivider.divideComponent(abstractContentComponent);
+            nextDivider.divideComponent(sourceComponent);
         }
 
 

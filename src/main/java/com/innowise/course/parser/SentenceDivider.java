@@ -12,29 +12,29 @@ public final class SentenceDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_SENTENCE = "(?s)[^.!?]+[.!?]+(?:\\s|$)|[^.!?]+$";
     private AbstractContentComponent contentComponent;
-    private AbstractDivider nextDivider;
-
-    @Override
-    public void setNextDivider(AbstractDivider nextDivider) {
-        this.nextDivider = nextDivider;
-    }
 
     public SentenceDivider(AbstractContentComponent paragraphComponent) {
         this.contentComponent = paragraphComponent;
     }
 
     @Override
-    public void divideComponent(AbstractContentComponent abstractContentComponent) throws TextException {
-        if (abstractContentComponent instanceof ParagraphComponent) {
-            String line = String.join("\n", abstractContentComponent.getText());
+    public boolean checkInstance(AbstractContentComponent component) {
+        return component instanceof ParagraphComponent;
+    }
+
+    @Override
+    public void divideComponent(AbstractContentComponent sourceComponent) throws TextException {
+        if (checkInstance(sourceComponent)) {
+            String line = String.join("\n", sourceComponent.getText());
             Matcher m = Pattern.compile(DIVIDE_ON_SENTENCE).matcher(line);
             while (m.find()){
                 contentComponent.add(new SentenceComponent(m.group()));
             }
-            System.out.println("sentence");
+            for (AbstractContentComponent component : contentComponent.getInnerComponentList(sourceComponent)){
+                nextDivider.divideComponent(component);
+            }
         } else if (nextDivider != null) {
-            System.out.println("set next divider in sentencedivider");;
-            nextDivider.divideComponent(abstractContentComponent);
+            nextDivider.divideComponent(sourceComponent);
         }
 
 

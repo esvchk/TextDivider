@@ -12,27 +12,29 @@ public final class LexemeDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_LEXEME = "\\S+";
     private AbstractContentComponent contentComponent;
-    private AbstractDivider nextDivider;
-
-    public void setNextDivider(AbstractDivider nextDivider) {
-        this.nextDivider = nextDivider;
-    }
 
     public LexemeDivider(AbstractContentComponent sentenceComponent) {
         this.contentComponent = sentenceComponent;
     }
 
     @Override
-    public void divideComponent(AbstractContentComponent abstractContentComponent) throws TextException {
-        if (abstractContentComponent instanceof SentenceComponent) {
-            String line = String.join(" ", abstractContentComponent.getText());
+    public boolean checkInstance(AbstractContentComponent component) {
+        return component instanceof SentenceComponent;
+    }
+
+    @Override
+    public void divideComponent(AbstractContentComponent sourceComponent) throws TextException {
+        if (checkInstance(sourceComponent)) {
+            String line = String.join(" ", sourceComponent.getText());
             Matcher matcher = Pattern.compile(DIVIDE_ON_LEXEME).matcher(line);
             while(matcher.find()){
                 contentComponent.add(new LexemeComponent(matcher.group()));
             }
-            System.out.println("lexeme");
+            for (AbstractContentComponent component : contentComponent.getInnerComponentList(sourceComponent)){
+                nextDivider.divideComponent(component);
+            }
         } else if (nextDivider != null){
-            nextDivider.divideComponent(abstractContentComponent);
+            nextDivider.divideComponent(sourceComponent);
         }
     }
 }

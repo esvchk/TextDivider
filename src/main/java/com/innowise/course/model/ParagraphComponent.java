@@ -18,7 +18,8 @@ public class ParagraphComponent extends AbstractContentComponent {
         sentences.add(component);
     }
 
-    public List<AbstractContentComponent> getSentences() {
+    @Override
+    public List<AbstractContentComponent> getInnerComponentList(AbstractContentComponent abstractContentComponent) {
         return sentences;
     }
 

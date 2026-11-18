@@ -1,15 +1,15 @@
 package com.innowise.course.model;
 
 
+import java.util.List;
+
 public abstract class AbstractContentComponent {
 
-    public void add(AbstractContentComponent component) {
-        throw new UnsupportedOperationException();
-    }
+    public abstract void add(AbstractContentComponent component);
 
-    public String getText(){
-        throw new UnsupportedOperationException();
-    }
+    public abstract List<AbstractContentComponent> getInnerComponentList(AbstractContentComponent abstractContentComponent);
+
+    public abstract String getText();
 
 
 }

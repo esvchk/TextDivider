@@ -1,11 +1,23 @@
 package com.innowise.course.model;
 
+import java.util.List;
+
 public class CharacterComponent extends AbstractContentComponent {
 
     private String character;
 
     public CharacterComponent(String character) {
         this.character = character;
+    }
+
+    @Override
+    public void add(AbstractContentComponent component) {
+
+    }
+
+    @Override
+    public List<AbstractContentComponent> getInnerComponentList(AbstractContentComponent abstractContentComponent) {
+        return List.of();
     }
 
     @Override
