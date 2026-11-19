@@ -10,13 +10,8 @@ import java.util.regex.Pattern;
 
 public final class WordDivider extends AbstractDivider {
 
-    private static final String DIVIDE_ON_WORDS = "[\\p{L}\\p{N}]+";
-    private AbstractContentComponent contentComponent;
+    private static final String DIVIDE_ON_WORDS = "\\S+";
 
-
-    public WordDivider(AbstractContentComponent lexemeComponent) {
-        this.contentComponent = lexemeComponent;
-    }
 
     @Override
     public boolean checkInstance(AbstractContentComponent component) {
@@ -29,9 +24,9 @@ public final class WordDivider extends AbstractDivider {
             String line = String.join("", sourceComponent.getText());
             Matcher matcher = Pattern.compile(DIVIDE_ON_WORDS).matcher(line);
             while (matcher.find()){
-                contentComponent.add(new WordComponent(matcher.group()));
+                sourceComponent.add(new WordComponent(matcher.group()));
             }
-            for (AbstractContentComponent component : contentComponent.getInnerComponentList(sourceComponent)){
+            for (AbstractContentComponent component : sourceComponent.getInnerComponentList(sourceComponent)){
                 nextDivider.divideComponent(component);
             }
         } else if (nextDivider != null) {

@@ -6,6 +6,7 @@ import com.innowise.course.model.AbstractContentComponent;
 import com.innowise.course.model.ParagraphComponent;
 import com.innowise.course.model.TextComponent;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,11 +14,6 @@ import java.util.regex.Pattern;
 public final class ParagraphDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_PARAGRAPH = "(?m)^[ \\t]+(\\S.*(?:\\n(?![ \\t]*$).*)*)";
-    private AbstractContentComponent contentComponent;
-
-    public ParagraphDivider(AbstractContentComponent textComponent) {
-        this.contentComponent = textComponent;
-    }
 
     @Override
     public boolean checkInstance(AbstractContentComponent abstractContentComponent) {
@@ -30,15 +26,13 @@ public final class ParagraphDivider extends AbstractDivider {
             String line = String.join("\n", sourceComponent.getText());
             Matcher m = Pattern.compile(DIVIDE_ON_PARAGRAPH).matcher(line);
             while (m.find()) {
-                contentComponent.add(new ParagraphComponent(m.group()));
+                sourceComponent.add(new ParagraphComponent(m.group()));
             }
-            for (AbstractContentComponent component : contentComponent.getInnerComponentList(sourceComponent)){
+            for (AbstractContentComponent component : sourceComponent.getInnerComponentList(sourceComponent)){
                 nextDivider.divideComponent(component);
             }
         } else if (nextDivider != null) {
             nextDivider.divideComponent(sourceComponent);
         }
-
-
     }
 }

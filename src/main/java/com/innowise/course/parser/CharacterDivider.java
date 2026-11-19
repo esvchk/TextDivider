@@ -11,11 +11,8 @@ import java.util.regex.Pattern;
 public final class CharacterDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_CHARACTERS = "\\S";
-    private AbstractContentComponent contentComponent;
 
-    public CharacterDivider(AbstractContentComponent contentComponent) {
-        this.contentComponent = contentComponent;
-    }
+
 
     @Override
     public boolean checkInstance(AbstractContentComponent component) {
@@ -28,10 +25,10 @@ public final class CharacterDivider extends AbstractDivider {
             String line = String.join("", sourceComponent.getText());
             Matcher matcher = Pattern.compile(DIVIDE_ON_CHARACTERS).matcher(line);
             while(matcher.find()){
-                contentComponent.add(new CharacterComponent(matcher.group()));
+                sourceComponent.add(new CharacterComponent(matcher.group()));
             }
-        } else  {
-            throw new TextException("No more handlers");
+        } else if (nextDivider != null){
+            nextDivider.divideComponent(sourceComponent);
         }
     }
 }
