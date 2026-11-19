@@ -12,8 +12,6 @@ public final class CharacterDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_CHARACTERS = "\\S";
 
-
-
     @Override
     public boolean checkInstance(AbstractContentComponent component) {
         return component instanceof WordComponent;

@@ -6,8 +6,7 @@ import com.innowise.course.model.AbstractContentComponent;
 import com.innowise.course.model.ParagraphComponent;
 import com.innowise.course.model.TextComponent;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

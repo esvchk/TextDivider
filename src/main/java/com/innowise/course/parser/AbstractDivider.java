@@ -12,7 +12,7 @@ public abstract class AbstractDivider {
         this.nextDivider = nextDivider;
     }
 
-    public abstract boolean checkInstance(AbstractContentComponent component);
+    protected abstract boolean checkInstance(AbstractContentComponent component);
 
     public abstract void divideComponent(AbstractContentComponent sourceComponent) throws TextException;
 }

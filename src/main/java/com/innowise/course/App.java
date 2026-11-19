@@ -25,6 +25,7 @@ public class App {
         sentenceDivider.setNextDivider(lexemeDivider);
         lexemeDivider.setNextDivider(wordDivider);
         wordDivider.setNextDivider(characterDivider);
+        characterDivider.setNextDivider(paragraphDivider);
 
         paragraphDivider.divideComponent(textComponent);
 
