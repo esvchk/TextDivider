@@ -14,7 +14,7 @@ public class App {
         TextReader textReader = new TextReaderImpl();
         String line = String.join("\n", textReader.read(
                 Path.of("D:\\courses\\project\\TextDivider\\.idea\\source.txt")));
-        AbstractContentComponent textComponent = new TextComponent(line);
+        TextComponent textComponent = new TextComponent(line);
         ParagraphDivider paragraphDivider = new ParagraphDivider();
         SentenceDivider sentenceDivider = new SentenceDivider();
         LexemeDivider lexemeDivider = new LexemeDivider();
@@ -29,10 +29,10 @@ public class App {
 
         paragraphDivider.divideComponent(textComponent);
 
-        System.out.println(textComponent);
 
-        printTree(textComponent,0);
+//        printTree(textComponent,0);
 
+        System.out.println(textComponent.letterCounter());
 
     }
 

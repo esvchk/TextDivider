@@ -30,6 +30,21 @@ public class TextComponent extends AbstractContentComponent {
         return paragraphs;
     }
 
+    public int charCounter(){
+        return text.length();
+    }
+
+    public int letterCounter() {
+        int counter = 0;
+        char[] chars = this.text.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (Character.isLetter(chars[i])) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
     @Override
     public String toString() {
         return "TextComponent{" +
