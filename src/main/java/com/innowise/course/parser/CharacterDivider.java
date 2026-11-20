@@ -25,8 +25,8 @@ public final class CharacterDivider extends AbstractDivider {
             while(matcher.find()){
                 sourceComponent.add(new CharacterComponent(matcher.group()));
             }
-        } else if (nextDivider != null){
-            nextDivider.divideComponent(sourceComponent);
+        } else {
+
         }
     }
 }

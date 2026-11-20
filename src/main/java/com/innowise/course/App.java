@@ -32,7 +32,7 @@ public class App {
 
 //        printTree(textComponent,0);
 
-        System.out.println(textComponent.letterCounter());
+        System.out.println(textComponent.rebuildTextBack());
 
     }
 
