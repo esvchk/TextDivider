@@ -3,7 +3,7 @@ package com.innowise.course.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SentenceComponent extends AbstractContentComponent{
+public class SentenceComponent extends AbstractContentComponent {
 
     private List<AbstractContentComponent> lexemes = new ArrayList<>();
 
@@ -21,7 +21,7 @@ public class SentenceComponent extends AbstractContentComponent{
     }
 
     @Override
-    public List<AbstractContentComponent> getInnerComponentList(AbstractContentComponent abstractContentComponent) {
+    public List<AbstractContentComponent> getInnerComponentList() {
         return lexemes;
     }
 
@@ -33,7 +33,6 @@ public class SentenceComponent extends AbstractContentComponent{
     @Override
     public String toString() {
         return "SentenceComponent{" +
-                "words=" + lexemes +
                 ", sentence='" + sentence + '\'' +
                 '}';
     }

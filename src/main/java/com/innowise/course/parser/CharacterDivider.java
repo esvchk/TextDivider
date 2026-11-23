@@ -1,14 +1,14 @@
 package com.innowise.course.parser;
 
-import com.innowise.course.exception.TextException;
 import com.innowise.course.model.AbstractContentComponent;
+import com.innowise.course.model.SentenceComponent;
 import com.innowise.course.model.CharacterComponent;
 import com.innowise.course.model.WordComponent;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class CharacterDivider extends AbstractDivider {
+public class CharacterDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_CHARACTERS = "\\S";
 
@@ -18,7 +18,7 @@ public final class CharacterDivider extends AbstractDivider {
     }
 
     @Override
-    public void divideComponent(AbstractContentComponent sourceComponent) throws TextException {
+    public void divideComponent(AbstractContentComponent sourceComponent){
         if (checkInstance(sourceComponent)) {
             String line = String.join("", sourceComponent.getText());
             Matcher matcher = Pattern.compile(DIVIDE_ON_CHARACTERS).matcher(line);

@@ -2,13 +2,14 @@ package com.innowise.course.parser;
 
 import com.innowise.course.exception.TextException;
 import com.innowise.course.model.AbstractContentComponent;
+import com.innowise.course.model.SentenceComponent;
 import com.innowise.course.model.LexemeComponent;
 import com.innowise.course.model.WordComponent;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class WordDivider extends AbstractDivider {
+public class WordDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_WORDS = "\\S+";
 
@@ -26,7 +27,7 @@ public final class WordDivider extends AbstractDivider {
             while (matcher.find()){
                 sourceComponent.add(new WordComponent(matcher.group()));
             }
-            for (AbstractContentComponent component : sourceComponent.getInnerComponentList(sourceComponent)){
+            for (AbstractContentComponent component : sourceComponent.getInnerComponentList()){
                 nextDivider.divideComponent(component);
             }
         } else if (nextDivider != null) {

@@ -3,7 +3,7 @@ package com.innowise.course.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WordComponent extends AbstractContentComponent{
+public class WordComponent extends AbstractContentComponent {
 
     private List<AbstractContentComponent> characters = new ArrayList<>();
 
@@ -23,7 +23,7 @@ public class WordComponent extends AbstractContentComponent{
     }
 
     @Override
-    public List<AbstractContentComponent> getInnerComponentList(AbstractContentComponent abstractContentComponent) {
+    public List<AbstractContentComponent> getInnerComponentList() {
         return characters;
     }
 
@@ -35,7 +35,6 @@ public class WordComponent extends AbstractContentComponent{
     @Override
     public String toString() {
         return "WordComponent{" +
-                "characters=" + characters +
                 ", word='" + word + '\'' +
                 '}';
     }

@@ -16,7 +16,7 @@ public class CharacterComponent extends AbstractContentComponent {
     }
 
     @Override
-    public List<AbstractContentComponent> getInnerComponentList(AbstractContentComponent abstractContentComponent) {
+    public List<AbstractContentComponent> getInnerComponentList() {
         return List.of();
     }
 

@@ -28,7 +28,7 @@ public class TextComponent extends AbstractContentComponent {
     }
 
     @Override
-    public List<AbstractContentComponent> getInnerComponentList(AbstractContentComponent abstractContentComponent) {
+    public List<AbstractContentComponent> getInnerComponentList() {
         return paragraphs;
     }
 
@@ -49,7 +49,7 @@ public class TextComponent extends AbstractContentComponent {
 
     public String rebuildTextBack(){
         StringBuilder sb = new StringBuilder();
-        for (AbstractContentComponent component : getInnerComponentList(this)){
+        for (AbstractContentComponent component : getInnerComponentList()){
             Matcher m = Pattern.compile("^[ \\t]").matcher(component.getText());
             if (m.find()) {
                 sb.append("\n");

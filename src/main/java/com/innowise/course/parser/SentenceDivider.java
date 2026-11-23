@@ -5,12 +5,10 @@ import com.innowise.course.model.AbstractContentComponent;
 import com.innowise.course.model.ParagraphComponent;
 import com.innowise.course.model.SentenceComponent;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class SentenceDivider extends AbstractDivider {
+public class SentenceDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_SENTENCE = "(?s)[^.!?]+[.!?]+(?:\\s|$)|[^.!?]+$";
 
@@ -28,7 +26,7 @@ public final class SentenceDivider extends AbstractDivider {
             while (m.find()){
                 sourceComponent.add(new SentenceComponent(m.group()));
             }
-            for (AbstractContentComponent component : sourceComponent.getInnerComponentList(sourceComponent)){
+            for (AbstractContentComponent component : sourceComponent.getInnerComponentList()){
                 nextDivider.divideComponent(component);
             }
         } else if (nextDivider != null) {

@@ -3,6 +3,7 @@ package com.innowise.course.parser;
 
 import com.innowise.course.exception.TextException;
 import com.innowise.course.model.AbstractContentComponent;
+import com.innowise.course.model.SentenceComponent;
 import com.innowise.course.model.ParagraphComponent;
 import com.innowise.course.model.TextComponent;
 
@@ -10,7 +11,7 @@ import com.innowise.course.model.TextComponent;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class ParagraphDivider extends AbstractDivider {
+public class ParagraphDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_PARAGRAPH = "(?m)^[ \\t]+(\\S.*(?:\\n(?![ \\t]*$).*)*)";
 
@@ -27,7 +28,7 @@ public final class ParagraphDivider extends AbstractDivider {
             while (m.find()) {
                 sourceComponent.add(new ParagraphComponent(m.group()));
             }
-            for (AbstractContentComponent component : sourceComponent.getInnerComponentList(sourceComponent)){
+            for (AbstractContentComponent component : sourceComponent.getInnerComponentList()){
                 nextDivider.divideComponent(component);
             }
         } else if (nextDivider != null) {

@@ -5,6 +5,8 @@ import com.innowise.course.model.*;
 import com.innowise.course.parser.*;
 import com.innowise.course.reader.TextReader;
 import com.innowise.course.reader.impl.TextReaderImpl;
+import com.innowise.course.service.TextService;
+import com.innowise.course.service.impl.TextServiceImpl;
 
 import java.nio.file.Path;
 import java.util.List;
@@ -20,6 +22,7 @@ public class App {
         LexemeDivider lexemeDivider = new LexemeDivider();
         WordDivider wordDivider = new WordDivider();
         CharacterDivider characterDivider = new CharacterDivider();
+        TextService textService = new TextServiceImpl();
 
         paragraphDivider.setNextDivider(sentenceDivider);
         sentenceDivider.setNextDivider(lexemeDivider);
@@ -28,11 +31,12 @@ public class App {
         characterDivider.setNextDivider(paragraphDivider);
 
         paragraphDivider.divideComponent(textComponent);
+        System.out.println(textService.findMaxQuantitySentencesWithRepeatingWords(textComponent));
 
 
 //        printTree(textComponent,0);
 
-        System.out.println(textComponent.rebuildTextBack());
+
 
     }
 
@@ -43,7 +47,7 @@ public class App {
         String indent = "  ".repeat(level);
 
         // одна строка на узел: тип, текст (обрезанный), число детей
-        List<AbstractContentComponent> children = component.getInnerComponentList(component);
+        List<AbstractContentComponent> children = component.getInnerComponentList();
         System.out.println(indent
                 + "├─ " + component.getClass().getSimpleName()
                 + " [" + truncate(component.getText(), 60) + "]"

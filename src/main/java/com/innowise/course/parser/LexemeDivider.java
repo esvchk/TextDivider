@@ -5,12 +5,10 @@ import com.innowise.course.model.AbstractContentComponent;
 import com.innowise.course.model.LexemeComponent;
 import com.innowise.course.model.SentenceComponent;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public final class LexemeDivider extends AbstractDivider {
+public class LexemeDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_LEXEME = "\\S+";
 
@@ -27,7 +25,7 @@ public final class LexemeDivider extends AbstractDivider {
             while(matcher.find()){
                 sourceComponent.add(new LexemeComponent(matcher.group()));
             }
-            for (AbstractContentComponent component : sourceComponent.getInnerComponentList(sourceComponent)){
+            for (AbstractContentComponent component : sourceComponent.getInnerComponentList()){
                 nextDivider.divideComponent(component);
             }
         } else if (nextDivider != null){

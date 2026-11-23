@@ -2,6 +2,7 @@ package com.innowise.course.parser;
 
 import com.innowise.course.exception.TextException;
 import com.innowise.course.model.AbstractContentComponent;
+import com.innowise.course.model.SentenceComponent;
 
 
 public abstract class AbstractDivider {

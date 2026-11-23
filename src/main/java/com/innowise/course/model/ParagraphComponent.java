@@ -19,7 +19,7 @@ public class ParagraphComponent extends AbstractContentComponent {
     }
 
     @Override
-    public List<AbstractContentComponent> getInnerComponentList(AbstractContentComponent abstractContentComponent) {
+    public List<AbstractContentComponent> getInnerComponentList() {
         return sentences;
     }
 
@@ -31,7 +31,6 @@ public class ParagraphComponent extends AbstractContentComponent {
     @Override
     public String toString() {
         return "ParagraphComponent{" +
-                "sentences=" + sentences +
                 ", paragraph='" + paragraph + '\'' +
                 '}';
     }

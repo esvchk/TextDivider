@@ -19,7 +19,7 @@ public class LexemeComponent extends AbstractContentComponent {
     }
 
     @Override
-    public List<AbstractContentComponent> getInnerComponentList(AbstractContentComponent abstractContentComponent) {
+    public List<AbstractContentComponent> getInnerComponentList() {
         return words;
     }
 
@@ -31,7 +31,6 @@ public class LexemeComponent extends AbstractContentComponent {
     @Override
     public String toString() {
         return "LexemeComponent{" +
-                "words=" + words +
                 ", lexeme='" + lexeme + '\'' +
                 '}';
     }
