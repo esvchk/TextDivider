@@ -26,7 +26,7 @@ public class CharacterDivider extends AbstractDivider {
                 sourceComponent.add(new CharacterComponent(matcher.group()));
             }
         } else {
-
+            System.out.println("No more Dividers");
         }
     }
 }
