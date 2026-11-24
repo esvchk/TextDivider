@@ -10,6 +10,6 @@ import java.util.Set;
 
 public interface TextService {
     List<AbstractContentComponent> findMaxQuantitySentencesWithRepeatingWords(TextComponent textComponent);
-    List<AbstractContentComponent> getSentencesInASCOrder();
+    void getSentencesInASCOrder(TextComponent textComponent,Character letter);
     void swapEachLexemeInText(TextComponent textComponent);
 }

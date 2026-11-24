@@ -31,7 +31,7 @@ public class App {
         characterDivider.setNextDivider(paragraphDivider);
 
         paragraphDivider.divideComponent(textComponent);
-        System.out.println(textService.findMaxQuantitySentencesWithRepeatingWords(textComponent));
+        textService.getSentencesInASCOrder(textComponent,'s');
 
 
 //        printTree(textComponent,0);
