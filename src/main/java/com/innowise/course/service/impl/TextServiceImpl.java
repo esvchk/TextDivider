@@ -1,7 +1,6 @@
 package com.innowise.course.service.impl;
 
 import com.innowise.course.model.AbstractContentComponent;
-import com.innowise.course.model.SentenceComponent;
 import com.innowise.course.model.TextComponent;
 import com.innowise.course.service.TextService;
 
@@ -13,10 +12,10 @@ public class TextServiceImpl implements TextService {
     @Override
     public List<AbstractContentComponent> findMaxQuantitySentencesWithRepeatingWords(TextComponent textComponent) {
         Map<String, Integer> wordMap = new HashMap<>();
-        List<AbstractContentComponent> components = new ArrayList<>();
+        List<AbstractContentComponent> repeatingSentences = new ArrayList<>();
         for (AbstractContentComponent paragraph : textComponent.getInnerComponentList()) {
             for (AbstractContentComponent sentence : paragraph.getInnerComponentList()) {
-                String[] words = sentence.getText().split("\\W+");
+                String[] words = sentence.getText().strip().split("\\W+");
                 for (String word : words) {
                     if (wordMap.get(word) != null) {
                         wordMap.put(word, wordMap.get(word) + 1);
@@ -27,15 +26,15 @@ public class TextServiceImpl implements TextService {
                 }
                 Set<String> set = wordMap.keySet();
                 for (String word : set) {
-                    if (wordMap.get(Collections.max(wordMap.keySet())) > 1 && sentence.getText().contains(word)){
-                        components.add(sentence);
+                    if (wordMap.get(word) > 1 && sentence.getText().contains(word)){
+                        if (!repeatingSentences.contains(sentence)) {
+                            repeatingSentences.add(sentence);
+                        }
                     }
-
                 }
-
             }
         }
-        return components;
+        return repeatingSentences;
     }
 
 

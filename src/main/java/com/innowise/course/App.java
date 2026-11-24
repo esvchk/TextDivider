@@ -36,8 +36,6 @@ public class App {
 
 //        printTree(textComponent,0);
 
-
-
     }
 
     private static void printTree(AbstractContentComponent component, int level) {
