@@ -56,10 +56,8 @@ public class TextServiceImpl implements TextService {
                         } else {
                             letterMap.put(letter, 1);
                         }
-
                     }
                 }
-
                 Integer max = Collections.max(letterMap.values());
                 if (max > 1) {
                     coincidences.put(sentence, max);
@@ -75,6 +73,7 @@ public class TextServiceImpl implements TextService {
 
     @Override
     public void swapEachLexemeInText(TextComponent textComponent) {
+
 
     }
 }
