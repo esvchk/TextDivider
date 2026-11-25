@@ -3,9 +3,8 @@ package com.innowise.course.parser;
 
 import com.innowise.course.exception.TextException;
 import com.innowise.course.model.AbstractContentComponent;
-import com.innowise.course.model.SentenceComponent;
-import com.innowise.course.model.ParagraphComponent;
-import com.innowise.course.model.TextComponent;
+import com.innowise.course.model.Component;
+import com.innowise.course.model.ComponentType;
 
 
 import java.util.regex.Matcher;
@@ -15,24 +14,32 @@ public class ParagraphDivider extends AbstractDivider {
 
     private static final String DIVIDE_ON_PARAGRAPH = "(?m)^[ \\t]+(\\S.*(?:\\n(?![ \\t]*$).*)*)";
 
+
     @Override
-    public boolean checkInstance(AbstractContentComponent abstractContentComponent) {
-        return abstractContentComponent instanceof TextComponent;
+    public boolean checkType(Component component) {
+        return component.getType() == ComponentType.TEXT;
     }
 
     @Override
-    public void divideComponent(AbstractContentComponent sourceComponent) throws TextException {
-        if (checkInstance(sourceComponent)) {
-            String line = String.join("\n", sourceComponent.getText());
-            Matcher m = Pattern.compile(DIVIDE_ON_PARAGRAPH).matcher(line);
-            while (m.find()) {
-                sourceComponent.add(new ParagraphComponent(m.group()));
+    public void divideComponent(Component sourceComponent){
+        try {
+            if (checkType(sourceComponent)) {
+                String line = String.join("\n", sourceComponent.getText());
+                Matcher m = Pattern.compile(DIVIDE_ON_PARAGRAPH).matcher(line);
+                while (m.find()) {
+                    sourceComponent.add(new Component(ComponentType.PARAGRAPH,m.group()));
+                }
+                for (Component component : sourceComponent.getInnerComponentList()){
+                    nextDivider.divideComponent(component);
+                }
+            } else if (nextDivider != null) {
+                nextDivider.divideComponent(sourceComponent);
             }
-            for (AbstractContentComponent component : sourceComponent.getInnerComponentList()){
-                nextDivider.divideComponent(component);
-            }
-        } else if (nextDivider != null) {
-            nextDivider.divideComponent(sourceComponent);
+        } catch (TextException e) {
+
         }
+
     }
+
+
 }

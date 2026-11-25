@@ -1,7 +1,7 @@
 package com.innowise.course.service.impl;
 
 import com.innowise.course.model.AbstractContentComponent;
-import com.innowise.course.model.TextComponent;
+import com.innowise.course.model.Component;
 import com.innowise.course.service.TextService;
 
 import java.util.*;
@@ -12,11 +12,11 @@ public class TextServiceImpl implements TextService {
 
 
     @Override
-    public List<AbstractContentComponent> findMaxQuantitySentencesWithRepeatingWords(TextComponent textComponent) {
+    public List<Component> findMaxQuantitySentencesWithRepeatingWords(Component component) {
         Map<String, Integer> wordMap = new HashMap<>();
-        List<AbstractContentComponent> repeatingSentences = new ArrayList<>();
-        for (AbstractContentComponent paragraph : textComponent.getInnerComponentList()) {
-            for (AbstractContentComponent sentence : paragraph.getInnerComponentList()) {
+        List<Component> repeatingSentences = new ArrayList<>();
+        for (Component paragraph: component.getInnerComponentList()) {
+            for (Component sentence : paragraph.getInnerComponentList()) {
                 String[] words = sentence.getText().strip().split("\\W+");
                 for (String word : words) {
                     if (wordMap.get(word) != null) {
@@ -42,11 +42,11 @@ public class TextServiceImpl implements TextService {
 
 
     @Override
-    public void getSentencesInASCOrder(TextComponent textComponent, Character sourceLetter) {
+    public void getSentencesInASCOrder(Component component, Character sourceLetter) {
         Map<String, Integer> letterMap = new HashMap<>();
-        Map<AbstractContentComponent, Integer> coincidences = new HashMap<>();
-        for (AbstractContentComponent paragraph : textComponent.getInnerComponentList()) {
-            for (AbstractContentComponent sentence : paragraph.getInnerComponentList()) {
+        Map<Component, Integer> coincidences = new HashMap<>();
+        for (Component paragraph : component.getInnerComponentList()) {
+            for (Component sentence : paragraph.getInnerComponentList()) {
                 Matcher matcher = Pattern.compile("\\w").matcher(sentence.getText());
                 while (matcher.find()) {
                     String[] letters = matcher.group().split("");
@@ -72,7 +72,7 @@ public class TextServiceImpl implements TextService {
     }
 
     @Override
-    public void swapEachLexemeInText(TextComponent textComponent) {
+    public void swapEachLexemeInText(Component component) {
 
 
     }

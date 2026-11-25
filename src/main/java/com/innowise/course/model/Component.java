@@ -1,18 +1,21 @@
 package com.innowise.course.model;
 
+import com.innowise.course.exception.TextException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TextComponent extends AbstractContentComponent {
+public class Component extends AbstractContentComponent {
 
-    private List<AbstractContentComponent> paragraphs = new ArrayList<>();
-
+    private List<Component> components = new ArrayList<>();
+    private ComponentType type;
     private String text;
 
 
-    public TextComponent(String text) {
+    public Component(ComponentType type, String text) {
+        this.type = type;
         this.text = text;
     }
 
@@ -23,13 +26,18 @@ public class TextComponent extends AbstractContentComponent {
 
 
     @Override
-    public void add(AbstractContentComponent component) {
-        paragraphs.add(component);
+    public void add(Component component) {
+        components.add(component);
+    }
+
+
+    public ComponentType getType() {
+        return type;
     }
 
     @Override
-    public List<AbstractContentComponent> getInnerComponentList() {
-        return paragraphs;
+    public List<Component> getInnerComponentList() {
+        return components;
     }
 
     public int charCounter(){
@@ -49,20 +57,22 @@ public class TextComponent extends AbstractContentComponent {
 
     public String rebuildTextBack(){
         StringBuilder sb = new StringBuilder();
-        for (AbstractContentComponent component : getInnerComponentList()){
+        for (Component component : getInnerComponentList()){
             Matcher m = Pattern.compile("^[ \\t]").matcher(component.getText());
             if (m.find()) {
                 sb.append("\n");
             }
             sb.append(component.getText());
+
         }
         return sb.toString();
     }
 
     @Override
     public String toString() {
-        return "TextComponent{" +
-                "paragraphs=" + paragraphs +
+        return "Component{" +
+                ", type=" + type +
+                ", text='" + text + '\'' +
                 '}';
     }
 }

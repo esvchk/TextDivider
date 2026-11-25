@@ -16,7 +16,7 @@ public class App {
         TextReader textReader = new TextReaderImpl();
         String line = String.join("\n", textReader.read(
                 Path.of("D:\\courses\\project\\TextDivider\\.idea\\source.txt")));
-        TextComponent textComponent = new TextComponent(line);
+        Component component = new Component(ComponentType.TEXT,line);
         ParagraphDivider paragraphDivider = new ParagraphDivider();
         SentenceDivider sentenceDivider = new SentenceDivider();
         LexemeDivider lexemeDivider = new LexemeDivider();
@@ -30,22 +30,23 @@ public class App {
         wordDivider.setNextDivider(characterDivider);
         characterDivider.setNextDivider(paragraphDivider);
 
-        paragraphDivider.divideComponent(textComponent);
-        textService.getSentencesInASCOrder(textComponent,'s');
+        paragraphDivider.divideComponent(component);
+        System.out.println(textService.findMaxQuantitySentencesWithRepeatingWords(component));
+//        textService.getSentencesInASCOrder(component,'s');
 
 
 //        printTree(textComponent,0);
 
     }
 
-    private static void printTree(AbstractContentComponent component, int level) {
+    private static void printTree(AbstractContentComponent component, int level) throws TextException {
         if (component == null) return;
 
         // отступ: 2 пробела на каждый уровень
         String indent = "  ".repeat(level);
 
         // одна строка на узел: тип, текст (обрезанный), число детей
-        List<AbstractContentComponent> children = component.getInnerComponentList();
+        List<Component> children = component.getInnerComponentList();
         System.out.println(indent
                 + "├─ " + component.getClass().getSimpleName()
                 + " [" + truncate(component.getText(), 60) + "]"

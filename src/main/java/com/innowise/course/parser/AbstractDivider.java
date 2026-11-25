@@ -2,7 +2,7 @@ package com.innowise.course.parser;
 
 import com.innowise.course.exception.TextException;
 import com.innowise.course.model.AbstractContentComponent;
-import com.innowise.course.model.SentenceComponent;
+import com.innowise.course.model.Component;
 
 
 public abstract class AbstractDivider {
@@ -13,7 +13,7 @@ public abstract class AbstractDivider {
         this.nextDivider = nextDivider;
     }
 
-    protected abstract boolean checkInstance(AbstractContentComponent component);
+    public abstract boolean checkType(Component component);
 
-    public abstract void divideComponent(AbstractContentComponent sourceComponent) throws TextException;
+    public abstract void divideComponent(Component component) throws TextException;
 }
